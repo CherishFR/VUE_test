@@ -27,17 +27,9 @@
                     markdown:this.markDownHandler,
                     content:this.$refs.t.innerText
                }
-               $.ajax({
-                   url:"http:127.0.0.1:8000/api/comments/create/",
-                   data:json,
-                   method:"post",
-                   success:function(data){
-                       _this.$store.state.allList = data
-                   },
-                   error:function(){
-
-                   },
-               })
+            // 触发mutation的方法，这个方法只限于同步操作
+            //   this.$store.commit("addOneNote",json)
+            this.$store.dispatch("addOneNote",json)
            }
         },
         computed:{

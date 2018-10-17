@@ -23,7 +23,33 @@ const store = new Vuex.Store({
     }
   },
   mutations:{
-
+    getAllDatas(state){
+      $.ajax({
+        url:"http:127.0.0.1:8000/api/comments/",
+        methods:"get",
+        success:function(data){
+          state.allList = data;
+        }
+      })
+    },
+    ADDNOENOTE(state,json){
+      $.ajax({
+        url:"http:127.0.0.1:8000/api/comments/create/",
+        data:json,
+        method:"post",
+        success:function(data){
+            state.allList = data
+        },
+        error:function(err){
+            alert(err)
+        },
+    })
+    }
+  },
+  actions:{
+    addOneNote(context){
+      context.commit("ADDNOENOTE")
+    }
   }
 })
 
